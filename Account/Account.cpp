@@ -3,17 +3,19 @@
 void createAccountList(AccountList &A) {
     A.first = NULL;
 }
-
 void registerAccount(AccountList &A, string username, string password, string role) {
+    adrAccount nodeBantu = A.first;
 
-    while (A.first != NULL) {
-        if (A.first->username == username) {
-            cout << "\nUsername sudah ada. Silakan gunakan username lain.\n";
+    // cek apakah username sudah ada
+    while (nodeBantu != NULL) {
+        if (nodeBantu->username == username) {
+            cout << "\nUsername sudah digunakan. Silakan pilih yang lain.\n";
             return;
         }
-        A.first = A.first->next;
+        nodeBantu = nodeBantu->next;
     }
 
+    // jika belum ada, buat akun baru
     adrAccount node = new Account;
     node->username = username;
     node->password = password;
@@ -26,6 +28,7 @@ void registerAccount(AccountList &A, string username, string password, string ro
         cout << "\nRegistrasi berhasil! Silakan login.\n";
     }
 }
+
 
 adrAccount login(AccountList A, string username, string password) {
     adrAccount node = A.first;
@@ -41,4 +44,5 @@ adrAccount login(AccountList A, string username, string password) {
     cout << "\nUsername atau password salah!\n";
     return NULL;
 }
+
 
